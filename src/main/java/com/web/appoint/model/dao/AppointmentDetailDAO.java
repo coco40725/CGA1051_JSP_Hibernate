@@ -11,8 +11,8 @@ import java.util.List;
  */
 public interface AppointmentDetailDAO  extends CoreDAO<AppointmentDetail, AppointmentDetail.PK> {
     AppointmentDetail.PK[] addBatch(AppointmentDetail[] ts);
-    Integer deleteByAmpId(Integer ampID);
-    Integer getTotalPriceByAmpId(Integer ampID);
-    List<AppointmentDetail> getAllServicesByAmpId(Integer ampID);
+    Integer deleteByApmId(Integer apmID);
+    Integer getTotalPriceByApmId(Integer apmID);
+    List<AppointmentDetail> getAllServicesByApmId(Integer apmID);
 
 }

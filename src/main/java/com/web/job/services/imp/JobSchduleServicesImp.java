@@ -107,7 +107,7 @@ public class JobSchduleServicesImp implements JobSchduleServices {
 
     @Override
     public List<JobSchedule> findAllJobs() {
-        // 完整顯示 schID schDate schPeriod groomerName asstID1Name asstID2Name employeeNote ampID
+        // 完整顯示 schID schDate schPeriod groomerName asstID1Name asstID2Name employeeNote apmID
         // 必須與員工資料串接 (先暫不接)
         List<JobSchedule> all = jobScheduleImp.getAll();
         return integrateJobSchedules(all);
@@ -128,7 +128,7 @@ public class JobSchduleServicesImp implements JobSchduleServices {
         for(JobSchedule job : all){
             Appointment appoint = appointmentImp.findAppointBySchId(job.getSchID());
             if (appoint != null){
-                job.setAmpId(appoint.getAmpID());
+                job.setAmpId(appoint.getApmID());
             }
             // TODO: 模擬從 staff 串接員工姓名, StaffDAO.getName(id)
             job.setGroomerName(job.getGroomerID() + "-美容師名字");

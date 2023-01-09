@@ -21,7 +21,7 @@
 
   <!-- TODO: 目前先使用 完整css-->
   <!-- Theme style -->
-  <link rel="stylesheet" href="/static/backstage/css/adminlte.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/backstage/css/adminlte.css">
   <!-- childTable style -->
   <style>
     .childTable th{
@@ -107,12 +107,8 @@
                       <th>班表編號</th>
                       <th>服務詳情</th>
                       <th></th>
-                      <th></th>
                     </tr>
                   </thead>
-                  <tbody>
-
-                  </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
@@ -127,27 +123,6 @@
     </section>
     <!-- /.content -->
 
-    <!-- Remove Modal content   -->
-    <div class="modal fade" id="RemoveModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">資料刪除</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            確認要刪除此筆資料?
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="submit" class="btn btn-danger btn-remove-confirm">確認</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /.Remove Modal content   -->
 
     <!-- Edit Modal content   -->
     <div class="modal fade" id="EditModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -221,11 +196,11 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="/static/backstage/plugins/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="/static/backstage/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE -->
-<script src="/static/backstage/js/adminlte.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/js/adminlte.js"></script>
 
 <!-- DataTables  & Plugins -->
 <script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -250,30 +225,30 @@
 
 <!-- DataTable show child row -->
 <script>
-  /* Formatting function for row details - modify as you need */
+
   function format ( d ) {
     // `d` is the original data object for the row
     let tbody = `
-<tbody class="childTable">
-  <tr>
-      <th>服務編號</th>
-      <th>服務名稱</th>
-      <th>服務價格</th>
-      <th>優惠方案編號</th>
-      <th>優惠方案名稱</th>
-      <th>優惠方案價</th>
-  </tr>`;
+        <tbody class="childTable">
+          <tr>
+              <th>服務編號</th>
+              <th>服務名稱</th>
+              <th>服務價格</th>
+              <th>優惠方案編號</th>
+              <th>優惠方案名稱</th>
+              <th>優惠方案價</th>
+          </tr>`;
 
 
     for (let i = 0; i < d.serviceId.length; i ++){
       tbody += `
         <tr>
-            <td>${d.serviceId[i]}</td>
-            <td>${d.serviceName[i]}</td>
-            <td>${d.servicePrice[i]}</td>
-            <td>${d.saleId[i]}</td>
-            <td>${d.saleName[i]}</td>
-            <td>${d.salePrice[i]}</td>
+            <td>\${d.serviceId[i]}</td>
+            <td>\${d.serviceName[i]}</td>
+            <td>\${d.servicePrice[i]}</td>
+            <td>\${d.saleId[i]}</td>
+            <td>\${d.saleName[i]}</td>
+            <td>\${d.salePrice[i]}</td>
         </tr>
         `
     }
@@ -282,66 +257,50 @@
                 <tr>
                   <td colspan="6" style="border-top: 1px solid #dee2e6;
                   border-right: 1px solid #dee2e6;
-                  border-bottom: 1px solid #dee2e6"><b>顧客備註</b>: ${d.clientNote}</td>
+                  border-bottom: 1px solid #dee2e6"><b>顧客備註</b>: \${d.clientNote}</td>
                 </tr>
                 </tbody>
             `;
     return tbody;
   }
-
   $(document).ready(function() {
     let table = $('#reserveTable').DataTable({
       autoWidth: false,
       responsive: true,
       lengthChange: true,
       info: true,
-      altEditor: true,     // Enable altEditor
-      ajax: "/templates/backstage/salon/objects.txt",
+      altEditor: false,     // Enable altEditor
+      ajax:"${pageContext.request.contextPath}/ipet-back/appoint/appoints",
+      method: "GET",
 
       //  填寫直接顯示的欄位，需要與thead tfoot 對應
       "columns": [
-        { data: "reserveId",  responsivePriority: 1,  className: "reserveId"},
-        { data: "memberName",  responsivePriority: 2,  className: "memberName"},
-        { data: "petName",  className: "petName"},
-        { data: "reserveDate",  responsivePriority: 3 , className: "reserveDate"},
-        { data: "reservePeriod",  responsivePriority: 4, className: "reservePeriod"},
-        { data: "totalPrice", className: "totalPrice" },
-        { data: "reserveStatus", className: "reserveStatus"},
-        { data: "jobId", className: "jobId"},
-        {
+        {data: "apmID", responsivePriority: 1,  className: "reserveId"},
+        {data: "memName", responsivePriority: 2,  className: "memberName"},
+        {data: "petName", className: "petName"},
+        {data: "schDate", responsivePriority: 3 , className: "reserveDate"},
+        {data: "schPeriod", responsivePriority: 4, className: "reservePeriod"},
+        {data: "totalPrice", className: "totalPrice" },
+        {data: "apmStatusDesc", className: "reserveStatus"},
+        {data: "schID", className: "jobId"},
+        {data: null,
           className:      'details-control',
           orderable:      false,
-          data:           null,
           defaultContent: '',
           responsivePriority: 5,
           type: "readonly"
         },
         {
-          data: null,
-          defaultContent:
-                  '<button type="submit" class="btn btn-light" data-toggle="modal" data-target="#EditModal" data-whatever="@mdo">' +
-                  '<i class="fas fa-solid fa-pen"></i>' +
-                  '</button>',
           className: 'row-edit dt-center',
           orderable: false,
           responsivePriority: 6
-        },
-        {
-          data: null,
-          defaultContent:
-                  '<button type="submit" class="btn btn-danger" data-toggle="modal" data-target="#RemoveModal">\n' +
-                  ' <i class="fas fa-solid fa-trash"></i>' +
-                  '</button>',
-          className: 'row-remove dt-center',
-          orderable: false,
-          responsivePriority: 7
         }
       ],
       select: {
         style: 'single',
         toggleable: false
       },
-      order: [[1, 'asc']]
+      order: [[1, 'desc']]
     });
 
 
@@ -357,25 +316,13 @@
         // This row is already open - close it
         row.child.hide();
         tr.removeClass('shown');
-      }
-      else {
+      } else {
         // Open this row
-        row.child( format(row.data()) ).show();
+        row.child($().html()).show();
         tr.addClass('shown');
       }
     });
 
-
-    // TODO: (需要重寫) Delete data from modal
-    $('#reserveTable tbody').on('click', 'td.row-remove', function (){
-      // TODO: 從資料庫移除資料
-      let targetData = $(event.target).closest("tr");
-      $('.modal-footer').on('click', '.btn-remove-confirm', function (){
-        targetData.remove();
-        // table.ajax().reload();
-        $('#RemoveModal').modal('hide');
-      })
-    });
 
 
     // TODO: (需要重寫)  Edit data from modal
@@ -432,7 +379,6 @@
             table.ajax().reload();
             return;
         }
-        console.log(targetData.querySelector("td.reserveStatus").innerText);
 
         // 3. update the reservePeriod
         targetData.querySelector("td.reservePeriod").innerText = $('#reservePeriod-modal').val();

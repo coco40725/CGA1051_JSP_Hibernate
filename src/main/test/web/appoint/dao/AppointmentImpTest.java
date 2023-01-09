@@ -22,7 +22,7 @@ import com.web.appoint.model.entities.Appointment;
             transaction = session.beginTransaction();
             Appointment appointment = new Appointment();
             appointment.setSchID(40);
-            appointment.setAmpStatus(2);
+            appointment.setApmStatus(2);
             appointment.setMemID(1);
             appointment.setPetID(1);
             appointment.setCustomerNote("我是測試狗狗!!");
@@ -43,8 +43,8 @@ import com.web.appoint.model.entities.Appointment;
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
             Appointment appointment = new Appointment();
-            appointment.setAmpID(12);
-            appointment.setAmpStatus(1);
+            appointment.setApmID(12);
+            appointment.setApmStatus(1);
             appointment.setSchID(39);
             appointment.setCustomerNote("我是測試狗狗!! 我被改了!!");
             appointmentImp.update(appointment);
@@ -93,7 +93,7 @@ import com.web.appoint.model.entities.Appointment;
         try {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             transaction = session.beginTransaction();
-            System.out.println(appointmentImp.findAppointBySchId(199));
+            System.out.println(appointmentImp.findAppointBySchId(1));
             transaction.commit();
         }catch (HibernateException e){
             e.printStackTrace();

@@ -2,6 +2,8 @@ package com.web.appoint.controller;
 
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.web.appoint.model.entities.Appointment;
 import com.web.appoint.services.AppointServices;
 import com.web.appoint.services.imp.AppointServicesImp;
@@ -29,8 +31,15 @@ public class AppointController extends HttpServlet {
         String path = req.getServletPath();
         if ("/ipet-back/appoint/appoints".equals(path)){
             AppointServices appointDetailServices = new AppointServicesImp();
+            GsonBuilder builder = new GsonBuilder();
+            Gson gson = builder.serializeNulls()
+                    .setDateFormat("yyyy-MM-dd")
+                    .create();
+
             List<Appointment> allServices = appointDetailServices.findAllAppoint();
-            req.setAttribute("appoints", allServices);
+            String allServicesJSON = gson.toJson(allServices);
+            allServicesJSON += "{ \"data\" :" + allServicesJSON + "}";
+            req.setAttribute("appoints", allServicesJSON);
             req.getRequestDispatcher("/templates/backstage/salon/salonAppointAll.jsp").forward(req, resp);
 
         }else if ("/ipet-back/appoint/appoints_cancelled".equals(path)){

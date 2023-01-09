@@ -10,7 +10,7 @@ import java.util.List;
  * @create 2023/1/3 下午 01:18
  */
 public interface AppointmentDAO  extends CoreDAO<Appointment, Integer> {
-    // we could only update ampStatus, schDate, and Note
+    // we could only update apmStatus, schDate, and Note
     Integer update(Appointment t);
     Appointment findAppointBySchId(Integer schID);
     List<Appointment> findAppointByStatus(Integer status);

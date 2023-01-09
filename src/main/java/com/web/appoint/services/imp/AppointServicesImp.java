@@ -41,7 +41,7 @@ public class AppointServicesImp implements AppointServices {
 
         // 2. 判斷此預約是否只預約一種 Service category
         Set<Integer> serviceCategoryIds = new HashSet<>();
-        for (AppointmentDetail appointmentDetail : appointmentDetailImp.getAllServicesByAmpId(appointment.getAmpID())) {
+        for (AppointmentDetail appointmentDetail : appointmentDetailImp.getAllServicesByApmId(appointment.getApmID())) {
             // TODO: 串接 serviceCategory
         }
         if (serviceCategoryIds.size() != 1) {
@@ -50,7 +50,7 @@ public class AppointServicesImp implements AppointServices {
             return appointment;
         }
 
-        // 3. 將資料加進 Appointment Table，並獲得 ampId
+        // 3. 將資料加進 Appointment Table，並獲得 apmId
         appointment.setSuccessful(true);
         appointment.setMessage("新增成功");
         Integer ampId = appointmentImp.add(appointment);
@@ -74,13 +74,13 @@ public class AppointServicesImp implements AppointServices {
         jobScheduleImp.update(job);
 
         // 2. 刪除對應的 AppointmentDetail
-        appointmentDetailImp.deleteByAmpId(id);
+        appointmentDetailImp.deleteByApmId(id);
         return true;
     }
 
     @Override
     public Appointment editAppoint(Appointment newAppointment) {
-        Appointment oldAppointment = appointmentImp.getById(newAppointment.getAmpID());
+        Appointment oldAppointment = appointmentImp.getById(newAppointment.getApmID());
         JobSchedule originalJob = jobScheduleImp.getById(oldAppointment.getSchID());
         JobSchedule newSelectJob = jobScheduleImp.getById(newAppointment.getSchID());
 
@@ -98,7 +98,7 @@ public class AppointServicesImp implements AppointServices {
 
 
         // 2. 狀況 1: 班表更動 + 狀態沒動
-        if (!newSelectJob.equals(originalJob) && newAppointment.getAmpStatus().equals(oldAppointment.getAmpStatus())) {
+        if (!newSelectJob.equals(originalJob) && newAppointment.getApmStatus().equals(oldAppointment.getApmStatus())) {
             //  "新班表" 是否已被預約
             if (newSelectJob.getAmpId() != null) {
                 newAppointment.setSuccessful(false);
@@ -107,7 +107,7 @@ public class AppointServicesImp implements AppointServices {
             }
 
             // 新班表未被預約 --> 新增預約單至新班表，移除預約單從舊班表
-            newSelectJob.setAmpId(newAppointment.getAmpID());
+            newSelectJob.setAmpId(newAppointment.getApmID());
             originalJob.setAmpId(null);
             jobScheduleImp.update(originalJob);
             jobScheduleImp.update(newSelectJob);
@@ -118,9 +118,9 @@ public class AppointServicesImp implements AppointServices {
             return newAppointment;
 
             // 2. 狀況 2: 班表沒動 + 狀態更動
-        } else if (newSelectJob.equals(originalJob) && !newAppointment.getAmpStatus().equals(oldAppointment.getAmpStatus())) {
+        } else if (newSelectJob.equals(originalJob) && !newAppointment.getApmStatus().equals(oldAppointment.getApmStatus())) {
             //  預約單狀況更改為 已取消 (其餘狀態不用更新班表)，--> 移除預約單從舊班表
-            if (newAppointment.getAmpStatus().equals(2)){
+            if (newAppointment.getApmStatus().equals(2)){
                 originalJob.setAmpId(null);
                 jobScheduleImp.update(originalJob);
 
@@ -131,7 +131,7 @@ public class AppointServicesImp implements AppointServices {
             }
 
             // 2. 狀況 3: 班表更動 + 狀態更動
-        }else if (!newSelectJob.equals(originalJob) && !newAppointment.getAmpStatus().equals(oldAppointment.getAmpStatus())){
+        }else if (!newSelectJob.equals(originalJob) && !newAppointment.getApmStatus().equals(oldAppointment.getApmStatus())){
             //  "新班表" 是否已被預約
             if (newSelectJob.getAmpId() != null) {
                 newAppointment.setSuccessful(false);
@@ -139,7 +139,7 @@ public class AppointServicesImp implements AppointServices {
                 return newAppointment;
             }
 
-            if (newAppointment.getAmpStatus().equals(2)){
+            if (newAppointment.getApmStatus().equals(2)){
                 originalJob.setAmpId(null);
                 newSelectJob.setAmpId(null);
                 jobScheduleImp.update(originalJob);
@@ -173,8 +173,8 @@ public class AppointServicesImp implements AppointServices {
     private List<Appointment> integrateAppointments(List<Appointment> all) {
         for (Appointment appoint : all) {
             JobSchedule job = jobScheduleImp.getById(appoint.getSchID());
-            List<AppointmentDetail> allServicesByAmpId = appointmentDetailImp.getAllServicesByAmpId(appoint.getAmpID());
-            Integer price = appointmentDetailImp.getTotalPriceByAmpId(appoint.getAmpID());
+            List<AppointmentDetail> allServicesByAmpId = appointmentDetailImp.getAllServicesByApmId(appoint.getApmID());
+            Integer price = appointmentDetailImp.getTotalPriceByApmId(appoint.getApmID());
 
             appoint.setMemName(appoint.getMemID() + "-會員名字");
             appoint.setPetName(appoint.getPetID() + "-寵物名字");
@@ -182,11 +182,11 @@ public class AppointServicesImp implements AppointServices {
             appoint.setSchPeriod(job.getSchPeriod());
             appoint.setAppointmentDetails(allServicesByAmpId.toArray(AppointmentDetail[]::new));
             appoint.setTotalPrice(price);
-            switch (appoint.getAmpStatus()) {
-                case 0 -> appoint.setAmpStatusDesc("已支付訂金");
-                case 1 -> appoint.setAmpStatusDesc("已完成預約");
-                case 2 -> appoint.setAmpStatusDesc("預約取消");
-                case 3 -> appoint.setAmpStatusDesc("逾時未到");
+            switch (appoint.getApmStatus()) {
+                case 0 -> appoint.setApmStatusDesc("已支付訂金");
+                case 1 -> appoint.setApmStatusDesc("已完成預約");
+                case 2 -> appoint.setApmStatusDesc("預約取消");
+                case 3 -> appoint.setApmStatusDesc("逾時未到");
             }
         }
         return all;

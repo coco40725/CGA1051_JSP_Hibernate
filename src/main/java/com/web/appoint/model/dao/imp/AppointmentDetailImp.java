@@ -19,7 +19,7 @@ public class AppointmentDetailImp implements AppointmentDetailDAO {
         session.persist(appointmentDetail);
         AppointmentDetail.PK pk = new AppointmentDetail.PK();
         pk.svcId = appointmentDetail.getSvcId();
-        pk.ampId = appointmentDetail.getAmpId();
+        pk.apmId = appointmentDetail.getApmId();
         return pk;
     }
 
@@ -32,7 +32,7 @@ public class AppointmentDetailImp implements AppointmentDetailDAO {
             session.persist(appointmentDetail);
             AppointmentDetail.PK pk = new AppointmentDetail.PK();
             pk.svcId = appointmentDetail.getSvcId();
-            pk.ampId = appointmentDetail.getAmpId();
+            pk.apmId = appointmentDetail.getApmId();
             pks[i] = pk;
             i++;
         }
@@ -40,7 +40,7 @@ public class AppointmentDetailImp implements AppointmentDetailDAO {
     }
 
     @Override
-    public Integer deleteByAmpId(Integer ampID) {
+    public Integer deleteByApmId(Integer ampID) {
         Session session = getSession();
         String hql  = "DELETE FROM AppointmentDetail WHERE ampID = :ampID";
         return session.createQuery(hql)
@@ -64,12 +64,12 @@ public class AppointmentDetailImp implements AppointmentDetailDAO {
     }
 
     @Override
-    public Integer getTotalPriceByAmpId(Integer ampID) {
+    public Integer getTotalPriceByApmId(Integer apmID) {
         Session session = getSession();
         Integer price = 0;
-        String hql = "FROM AppointmentDetail WHERE ampID = :ampID";
+        String hql = "FROM AppointmentDetail WHERE apmId = :apmID";
         List<AppointmentDetail> list = session.createQuery(hql, AppointmentDetail.class)
-                .setParameter("ampID", ampID)
+                .setParameter("apmID", apmID)
                 .list();
         for (AppointmentDetail appointDetail : list) {
             price += appointDetail.getSalePrice();
@@ -78,11 +78,11 @@ public class AppointmentDetailImp implements AppointmentDetailDAO {
     }
 
     @Override
-    public List<AppointmentDetail> getAllServicesByAmpId(Integer ampID) {
+    public List<AppointmentDetail> getAllServicesByApmId(Integer apmID) {
         Session session = getSession();
-        String hql = "FROM AppointmentDetail WHERE ampID = :ampID";
+        String hql = "FROM AppointmentDetail WHERE apmId = :apmID";
         return session.createQuery(hql, AppointmentDetail.class).
-                setParameter("ampID", ampID)
+                setParameter("apmID", apmID)
                 .list();
     }
 

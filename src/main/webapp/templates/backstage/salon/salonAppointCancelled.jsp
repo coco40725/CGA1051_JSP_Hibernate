@@ -9,16 +9,16 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="/static/backstage/plugins/fontawesome-free/css/all.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/backstage/plugins/fontawesome-free/css/all.css">
   <!-- DataTables -->
-  <link rel="stylesheet" href="/static/backstage/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="/static/backstage/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="/static/backstage/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-  <link rel="stylesheet" href="/static/backstage/plugins/datatables-select/css/select.bootstrap4.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/backstage/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/backstage/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/backstage/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/backstage/plugins/datatables-select/css/select.bootstrap4.css">
 
   <!-- TODO: 目前先使用 完整css-->
   <!-- Theme style -->
-  <link rel="stylesheet" href="/static/backstage/css/adminlte.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/static/backstage/css/adminlte.css">
   <!-- childTable style -->
   <style>
     .childTable th{
@@ -34,12 +34,12 @@
     }
 
     td.details-control {
-      background: url("../../../static/backstage/img/more.png") no-repeat center;
+      background: url("${pageContext.request.contextPath}/static/backstage/img/more.png") no-repeat center;
       background-size: 25px;
       cursor: pointer;
     }
     tr.shown td.details-control {
-      background: url("../../../static/backstage/img/close.png") no-repeat center;
+      background: url("${pageContext.request.contextPath}/static/backstage/img/close.png") no-repeat center;
       background-size: 20px;
       cursor: pointer;
     }
@@ -72,9 +72,9 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/templates/backstage/index.htmljsp">Home</a></li>
+              <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/templates/backstage/index.htmljsp">Home</a></li>
               <li class="breadcrumb-item">美容預約管理</li>
-              <li class="breadcrumb-item active"><a href="/templates/backstage/salon/salonAppointCancelled.jsp">已取消的預約</a></li>
+              <li class="breadcrumb-item active"><a href="${pageContext.request.contextPath}/templates/backstage/salon/salonAppointCancelled.jsp">已取消的預約</a></li>
             </ol>
           </div>
         </div>
@@ -209,26 +209,26 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="/static/backstage/plugins/jquery/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
-<script src="/static/backstage/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE -->
-<script src="/static/backstage/js/adminlte.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/js/adminlte.js"></script>
 
 <!-- DataTables  & Plugins -->
-<script src="/static/backstage/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="/static/backstage/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="/static/backstage/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="/static/backstage/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="/static/backstage/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="/static/backstage/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="/static/backstage/plugins/jszip/jszip.min.js"></script>
-<script src="/static/backstage/plugins/pdfmake/pdfmake.min.js"></script>
-<script src="/static/backstage/plugins/pdfmake/vfs_fonts.js"></script>
-<script src="/static/backstage/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="/static/backstage/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="/static/backstage/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<script src="/static/backstage/plugins/datatables-select/js/dataTables.select.js" ></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/jszip/jszip.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="${pageContext.request.contextPath}/static/backstage/plugins/datatables-select/js/dataTables.select.js" ></script>
 
 
 <!-- sidebar menu Class -->
@@ -243,26 +243,26 @@
   function format ( d ) {
     // `d` is the original data object for the row
     let tbody = `
-<tbody class="childTable">
-  <tr>
-      <th>服務編號</th>
-      <th>服務名稱</th>
-      <th>服務價格</th>
-      <th>優惠方案編號</th>
-      <th>優惠方案名稱</th>
-      <th>優惠方案價</th>
-  </tr>`;
+        <tbody class="childTable">
+          <tr>
+              <th>服務編號</th>
+              <th>服務名稱</th>
+              <th>服務價格</th>
+              <th>優惠方案編號</th>
+              <th>優惠方案名稱</th>
+              <th>優惠方案價</th>
+          </tr>`;
 
 
     for (let i = 0; i < d.serviceId.length; i ++){
       tbody += `
         <tr>
-            <td>${d.serviceId[i]}</td>
-            <td>${d.serviceName[i]}</td>
-            <td>${d.servicePrice[i]}</td>
-            <td>${d.saleId[i]}</td>
-            <td>${d.saleName[i]}</td>
-            <td>${d.salePrice[i]}</td>
+            <td>\${d.serviceId[i]}</td>
+            <td>\${d.serviceName[i]}</td>
+            <td>\${d.servicePrice[i]}</td>
+            <td>\${d.saleId[i]}</td>
+            <td>\${d.saleName[i]}</td>
+            <td>\${d.salePrice[i]}</td>
         </tr>
         `
     }
@@ -271,7 +271,7 @@
                 <tr>
                   <td colspan="6" style="border-top: 1px solid #dee2e6;
                   border-right: 1px solid #dee2e6;
-                  border-bottom: 1px solid #dee2e6"><b>顧客備註</b>: ${d.clientNote}</td>
+                  border-bottom: 1px solid #dee2e6"><b>顧客備註</b>: \${d.clientNote}</td>
                 </tr>
                 </tbody>
             `;
@@ -285,7 +285,7 @@
       lengthChange: true,
       info: true,
       altEditor: true,     // Enable altEditor
-      ajax: "/templates/backstage/salon/objects.txt",
+      ajax: "${pageContext.request.contextPath}/templates/backstage/salon/objects.txt",
 
       //  填寫直接顯示的欄位，需要與thead tfoot 對應
       "columns": [
@@ -340,7 +340,9 @@
     $('#reserveTable tbody').on('click', 'td.details-control', function () {
       let tr = $(this).closest('tr');
       let row = table.row( tr );
-      console.log(row.data());
+      console.log($(this).closest('tr'));
+      console.log("this is row:" + row.data());
+      console.log(row.child);
 
       if ( row.child.isShown() ) {
         // This row is already open - close it

@@ -18,17 +18,17 @@ public class AppointmentImp implements AppointmentDAO {
     public Integer add(Appointment appointment) {
         Session session = getSession();
         session.persist(appointment);
-        return appointment.getAmpID();
+        return appointment.getApmID();
     }
 
     @Override
     public Integer update(Appointment newAppointment) {
         Session session = getSession();
-        Appointment oldAppointment = session.get(Appointment.class, newAppointment.getAmpID());
-        oldAppointment.setAmpStatus(newAppointment.getAmpStatus());
+        Appointment oldAppointment = session.get(Appointment.class, newAppointment.getApmID());
+        oldAppointment.setApmStatus(newAppointment.getApmStatus());
         oldAppointment.setSchID(newAppointment.getSchID());
         oldAppointment.setCustomerNote(newAppointment.getCustomerNote());
-        return newAppointment.getAmpID();
+        return newAppointment.getApmID();
     }
 
 
@@ -58,7 +58,7 @@ public class AppointmentImp implements AppointmentDAO {
     @Override
     public List<Appointment> findAppointByStatus(Integer status) {
         Session session = getSession();
-        String hql = "FROM Appointment WHERE ampStatus = :status";
+        String hql = "FROM Appointment WHERE apmStatus = :status";
         return session.createQuery(hql, Appointment.class)
                 .setParameter("status", status)
                 .list();

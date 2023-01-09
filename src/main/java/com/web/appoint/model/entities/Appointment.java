@@ -15,8 +15,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Entity
 @Table(name = "salon_appointment", catalog = "ipetdb")
 public class Appointment extends Core {
@@ -24,11 +24,11 @@ public class Appointment extends Core {
     @Column(name = "APM_ID")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ampID;
+    private Integer apmID;
     @Column(name = "APM_STATUS")
-    private Integer ampStatus;
+    private Integer apmStatus;
     @Transient
-    private String ampStatusDesc;
+    private String apmStatusDesc;
     @Column(name = "MEM_ID")
     private Integer memID;
     @Transient
@@ -52,15 +52,24 @@ public class Appointment extends Core {
     @Transient
     private AppointmentDetail[] appointmentDetails;
 
+    public Appointment() {
+    }
 
-    public Appointment(Integer ampStatus, Integer memID, Integer petID, Integer schID, Timestamp apmBuildTime, String customerNote, Integer totalPrice) {
-        this.ampStatus = ampStatus;
+    public Appointment(Integer apmID, Integer apmStatus, String apmStatusDesc, Integer memID, String memName, Integer petID, String petName, Integer schID, Date schDate, String schPeriod, Timestamp apmBuildTime, String customerNote, Integer totalPrice, AppointmentDetail[] appointmentDetails) {
+        this.apmID = apmID;
+        this.apmStatus = apmStatus;
+        this.apmStatusDesc = apmStatusDesc;
         this.memID = memID;
+        this.memName = memName;
         this.petID = petID;
+        this.petName = petName;
         this.schID = schID;
+        this.schDate = schDate;
+        this.schPeriod = schPeriod;
         this.apmBuildTime = apmBuildTime;
         this.customerNote = customerNote;
         this.totalPrice = totalPrice;
+        this.appointmentDetails = appointmentDetails;
     }
 
     @Override
@@ -68,12 +77,124 @@ public class Appointment extends Core {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Appointment that = (Appointment) o;
-        return ampID.equals(that.ampID) && ampStatus.equals(that.ampStatus) && memID.equals(that.memID) && petID.equals(that.petID) && schID.equals(that.schID) && apmBuildTime.equals(that.apmBuildTime) && Objects.equals(customerNote, that.customerNote) && totalPrice.equals(that.totalPrice) && appointmentDetails.equals(that.appointmentDetails);
+        return apmID.equals(that.apmID) && apmStatus.equals(that.apmStatus) && memID.equals(that.memID) && petID.equals(that.petID) && schID.equals(that.schID) && apmBuildTime.equals(that.apmBuildTime) && Objects.equals(customerNote, that.customerNote) && totalPrice.equals(that.totalPrice) && appointmentDetails.equals(that.appointmentDetails);
     }
 
 
     @Override
     public int hashCode() {
-        return Objects.hash(ampID, ampStatus, memID, petID, schID, apmBuildTime, customerNote, totalPrice, appointmentDetails);
+        return Objects.hash(apmID, apmStatus, memID, petID, schID, apmBuildTime, customerNote, totalPrice, appointmentDetails);
+    }
+
+    public Integer getApmID() {
+        return apmID;
+    }
+
+    public void setApmID(Integer apmID) {
+        this.apmID = apmID;
+    }
+
+    public Integer getApmStatus() {
+        return apmStatus;
+    }
+
+    public void setApmStatus(Integer apmStatus) {
+        this.apmStatus = apmStatus;
+    }
+
+    public String getApmStatusDesc() {
+        return apmStatusDesc;
+    }
+
+    public void setApmStatusDesc(String apmStatusDesc) {
+        this.apmStatusDesc = apmStatusDesc;
+    }
+
+    public Integer getMemID() {
+        return memID;
+    }
+
+    public void setMemID(Integer memID) {
+        this.memID = memID;
+    }
+
+    public String getMemName() {
+        return memName;
+    }
+
+    public void setMemName(String memName) {
+        this.memName = memName;
+    }
+
+    public Integer getPetID() {
+        return petID;
+    }
+
+    public void setPetID(Integer petID) {
+        this.petID = petID;
+    }
+
+    public String getPetName() {
+        return petName;
+    }
+
+    public void setPetName(String petName) {
+        this.petName = petName;
+    }
+
+    public Integer getSchID() {
+        return schID;
+    }
+
+    public void setSchID(Integer schID) {
+        this.schID = schID;
+    }
+
+    public Date getSchDate() {
+        return schDate;
+    }
+
+    public void setSchDate(Date schDate) {
+        this.schDate = schDate;
+    }
+
+    public String getSchPeriod() {
+        return schPeriod;
+    }
+
+    public void setSchPeriod(String schPeriod) {
+        this.schPeriod = schPeriod;
+    }
+
+    public Timestamp getApmBuildTime() {
+        return apmBuildTime;
+    }
+
+    public void setApmBuildTime(Timestamp apmBuildTime) {
+        this.apmBuildTime = apmBuildTime;
+    }
+
+    public String getCustomerNote() {
+        return customerNote;
+    }
+
+    public void setCustomerNote(String customerNote) {
+        this.customerNote = customerNote;
+    }
+
+    public Integer getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Integer totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public AppointmentDetail[] getAppointmentDetails() {
+        return appointmentDetails;
+    }
+
+    public void setAppointmentDetails(AppointmentDetail[] appointmentDetails) {
+        this.appointmentDetails = appointmentDetails;
     }
 }
