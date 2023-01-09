@@ -1,6 +1,6 @@
 package com.web.appoint.model.dao;
 
-import com.core.dao.CoreDAO;
+import com.core.model.dao.CoreDAO;
 import com.web.appoint.model.entities.Appointment;
 
 import java.util.List;

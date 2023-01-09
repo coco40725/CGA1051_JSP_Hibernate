@@ -1,6 +1,6 @@
 package com.web.appoint.model.entities;
 
-import com.core.entities.Core;
+import com.core.model.entities.Core;
 import lombok.*;
 
 import javax.persistence.*;

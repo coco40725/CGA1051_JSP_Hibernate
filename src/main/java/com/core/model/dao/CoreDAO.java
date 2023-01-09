@@ -1,4 +1,4 @@
-package com.core.dao;
+package com.core.model.dao;
 
 import com.core.util.HibernateUtil;
 import org.hibernate.Session;
